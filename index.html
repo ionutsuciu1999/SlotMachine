@@ -1,0 +1,207 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>Slot Machine Ionut Suciu</title>
+
+<script>
+var soldi = 100;
+var puntata = 0;
+var ultimosimbolo1 = 0;
+var ultimosimbolo2 = 0;
+var ultimosimbolo3 = 0;
+
+
+function aggiungisoldi(){
+if(soldi >=0 && soldi <100000){
+soldi = soldi + 100;
+document.getElementById("soldi").innerHTML = soldi;
+	}
+}
+
+function puntapiu(){
+if(soldi >=50){
+soldi = soldi - 50;
+puntata = puntata + 50;
+document.getElementById("soldi").innerHTML = soldi;
+document.getElementById("puntata").innerHTML = puntata;
+	}
+}
+
+function puntameno(){
+if(puntata >=50){
+soldi = soldi + 50;
+puntata = puntata - 50;
+document.getElementById("soldi").innerHTML = soldi;
+document.getElementById("puntata").innerHTML = puntata;
+	}
+}
+
+function gioca(){
+if((document.getElementById("puntata").innerHTML)>=50){
+puntata = 0;
+document.getElementById("puntata").innerHTML = 0;
+var randommm = Math.floor(Math.random() * 100);
+var nrandom1 = probabilita(randommm);
+console.log("1 rand = "+randommm);
+
+var randommm = Math.floor(Math.random() * 100);
+var nrandom2 = probabilita(randommm);
+console.log("1 rand = "+randommm);
+
+var randommm = Math.floor(Math.random() * 100);
+var nrandom3 = probabilita(randommm);
+console.log("1 rand = "+randommm);
+
+var immagine1 = start(nrandom1,0,1,0);
+var immagine2 = start(nrandom2,0,2,0);
+var immagine3 = start(nrandom3,0,3,0);
+
+console.log("Immagine 1 = "+immagine1);
+console.log("Immagine 2 = "+immagine2);
+console.log("Immagine 3 = "+immagine3);
+
+/*
+		if(immagine1==immagine2&&immagine2==immagine3){ //VINCITE
+			alert("HAI VINTOOO!");
+			if(immagine1 == 0){
+			puntata = puntata * 5;
+			} else if (immagine1 == 5){
+			puntata = puntata * 10;
+			} else if (immagine1 == 1){
+			puntata = puntata * 15;
+			} else if (immagine1 == 2){
+			puntata = puntata * 20;
+			} else if (immagine1 == 9){
+			puntata = puntata * 25;
+			} else if (immagine1 == 7){
+			puntata = puntata * 30;
+			} else if (immagine1 == 6){
+			puntata = puntata * 40;
+			} else if (immagine1 == 8){
+			puntata = puntata * 50;
+			} else if (immagine1 == 3){
+			puntata = puntata * 75;
+			} else if (immagine1 == 4){
+			puntata = puntata * 100;
+			}
+			
+		} else { //PERDITE
+		puntata = 0;
+		}
+		*/
+	}
+}
+
+function probabilita(nrandom){ //18,17,16,14,12,10,6,4,2,1
+//DIAMANTE 1/100
+if(nrandom>0 && nrandom<=1){ //se da 1 a 100 ho generato 1, faccio uscire il diamante (immagine 4)
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10; //es. esce il 47, il diamante è immagine 4, quindi dovra essere 44. il diamante esce se il numero di giri è 4,14,24,34,44, perciò vedo se devo girare 10,20,30,40 volte poi faccio + 4
+var risultato = (approssimato*10)+4;
+return risultato;
+//SETTE 2/100
+} else if(nrandom>1 && nrandom<=3) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+3;
+return risultato;
+//BAR 4/100
+} else if(nrandom>3 && nrandom<=7) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+8;
+return risultato;
+//MONETA 6/100
+} else if(nrandom>7 && nrandom<=13) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+6;
+return risultato;
+//QUADRIFOGLIO 10/100
+} else if(nrandom>13 && nrandom<=23) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+7;
+return risultato;
+//CUORE 12/100
+} else if(nrandom>23 && nrandom<=35) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+9;
+return risultato;
+//CAMPANA 14/100
+} else if(nrandom>35 && nrandom<=49) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+2;
+return risultato;
+//PICCHE 16/100
+} else if(nrandom>49 && nrandom<=65) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+1;
+return risultato;
+//CILIEGIA 17/100
+} else if(nrandom>65 && nrandom<=82) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+5;
+return risultato;
+//MELONE
+} else if(nrandom>82 && nrandom<=100) {
+var random1 = Math.floor(Math.random() * 50); 
+var approssimato = random1%10;
+var risultato = (approssimato*10)+0;
+return risultato;
+}
+}
+
+function start(nrandom,counter,nruota,nimmagine){ //funzione ricorsiva per avere il timer, javascript asyncrono?
+console.log(nrandom);
+var random = nrandom;
+var ruota = nruota;
+var immagine = nimmagine;
+
+
+  if(counter < random){
+    setTimeout(function(){
+      counter++;
+	  if(counter%10==0){ //ci sono 10 immagini, quindi non può superare il n.10
+	  immagine = 0;
+	  } else {
+	  immagine++;
+	  }
+	  
+	  console.log("random = "+random);
+	  console.log("counter = "+counter);
+	  console.log("immagine = "+immagine);
+
+      document.getElementById("ruota"+ruota).src = "immagini/"+immagine+".png";
+      start(random,counter,ruota,immagine);
+    }, 50);
+	 return immagine;
+  }
+
+}
+
+
+
+</script>
+
+</head>
+<body width="100%" style="background-color:orange">
+
+<img style="width:600px" src='immagini/slot.png'>
+<img id = "ruota1" style="width:121px; z-index:-5; position:absolute; margin-left: -532px; margin-top: +368px" src='immagini/0.png'>
+<img id = "ruota2" style="width:121px; z-index:-5; position:absolute; margin-left: -387px; margin-top: +368px" src='immagini/0.png'>
+<img id = "ruota3" style="width:121px; z-index:-5; position:absolute; margin-left: -240px; margin-top: +368px" src='immagini/0.png'>
+<img onmouseover="this.src='immagini/piupremuto.png';" onmouseout="this.src='immagini/piu.png';" onclick="puntapiu();" style="width:60px; z-index:+5; position:absolute; margin-left: -380px; margin-top: +531px" src='immagini/piu.png'>
+<img onmouseover="this.src='immagini/menopremuto.png';" onmouseout="this.src='immagini/meno.png';" onclick="puntameno();" style="width:60px; z-index:+5; position:absolute; margin-left: -451px; margin-top: +531px" src='immagini/meno.png'>
+<img onmouseover="this.src='immagini/levapremuto.png';" onmouseout="this.src='immagini/leva.png';" onclick="gioca();" style="width:60px; z-index:+5; position:absolute; margin-left: -78px; margin-top: +232px" src='immagini/leva.png'>
+<img onmouseover="this.src='immagini/pagapremuto.png';" onmouseout="this.src='immagini/paga.png';" onclick="aggiungisoldi();" style="width:97px; z-index:+5; position:absolute; margin-left: -214px; margin-top: +695px" src='immagini/paga.png'>
+<img style="width:320px; z-index:+5; position:absolute; margin-left:100px" src='immagini/vincite.png'>
+</body>
+<p id="soldi" style="font-size:270%; color:green; z-index:+5; position:absolute; margin-left: +308px; margin-top: -615px">100</p>
+<p id="puntata" style="font-size:250%; color:green; z-index:+5; position:absolute; margin-left: +308px; margin-top: -327px">0</p>
+<p>Progetto by Ionut Suciu Augustin: Slot machine con media ponderata, (anche la grafica e stata fatta da 0)</p>
+</html>
